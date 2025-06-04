@@ -1,0 +1,4 @@
+psycopg2==2.9.10
+notebook==7.4.3
+pandas==2.2.3
+semantic-kernel==1.32.1
