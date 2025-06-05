@@ -1,5 +1,5 @@
 import psycopg2
-from src.get_conn import get_connection_uri
+from get_conn import get_connection_uri
 from dotenv import load_dotenv
 load_dotenv(override=True)
 

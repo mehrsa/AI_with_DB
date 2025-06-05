@@ -1,5 +1,4 @@
 import psycopg2
-from src.get_conn import get_connection_uri
 from pandas import DataFrame
 from typing import Optional
 from semantic_kernel.functions import kernel_function
