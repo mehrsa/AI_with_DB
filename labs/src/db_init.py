@@ -3,15 +3,9 @@ from get_conn import get_connection_uri
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
-# Retrieve environment variables
-# POSTGRES_USER = os.getenv('POSTGRES_USER')
-# POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
-# POSTGRES_HOST = os.getenv('POSTGRES_HOST')
-# POSTGRES_PORT = os.getenv('POSTGRES_PORT')
-# POSTGRES_DB= os.getenv('POSTGRES_DB')
 
 def execute_sql_file(cursor, sql_file_path):
-    with open(sql_file_path, 'r') as file:
+    with open(sql_file_path, 'r', encoding="utf-8") as file:
         sql = file.read()
         print(f"Executing SQL file: {sql_file_path}")
         print(sql)  # Debug print to verify the content of the SQL file
@@ -25,14 +19,7 @@ def execute_sql_file(cursor, sql_file_path):
 if __name__ == "__main__":
 
     try:
-        # Establish the connection
-        # connection = psycopg2.connect(
-        #     host = POSTGRES_HOST,
-        #     database = POSTGRES_DB,
-        #     user = POSTGRES_USER,
-        #     password = POSTGRES_PASSWORD,
-        #     port= POSTGRES_PORT
-        # )
+
         conn_string = get_connection_uri()
         connection = psycopg2.connect(conn_string)
 
