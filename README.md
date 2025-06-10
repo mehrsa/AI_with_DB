@@ -1,7 +1,7 @@
 # **AI with Data Advanced Skilling Initiative**
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mehrsa/AI_with_DB/refs/heads/main/A%20professional%20banner%20image%20for%20the%20topic%20'AI%20with.png?token=GHSAT0AAAAAADBR4Q3SHDNM5YJI5IYAZ25M2CHK6VQ" alt="banner">
+  <img src="https://raw.githubusercontent.com/mehrsa/AI_with_DB/refs/heads/main/banner_image.png?token=GHSAT0AAAAAADBR4Q3SRXFS735LIIAHF4242CIGHXQ" alt="banner">
 </div>
 
 ## Prerequisites 
