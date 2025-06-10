@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
 
     # Replace with path to the SQL file
-    file_path = "ABC_co.sql"
+    file_path = "contoso_db.sql"
     try:
         # Execute the SQL file
         execute_sql_file(cursor, file_path)
