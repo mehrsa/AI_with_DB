@@ -1,10 +1,11 @@
 import urllib.parse
 import os
-
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
+# for help to enable Microsoft Entra ID authentication for Azure Database for PostgreSQL, see:
+# https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication
 def get_connection_uri():
 
     # Read URI parameters from the environment
