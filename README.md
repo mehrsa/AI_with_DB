@@ -16,7 +16,7 @@
     - set local version to 3.11.9: **pyenv local 3.11.9**
 3. Run one of below scripts to create a virtual environment: 
     - **virtualenv myenv**
-    - **python -mm venv myenv**
+    - **python -m venv myenv**
 4. Activate the virtual environment:
     - **.\myenv\Scripts\activate**
 5. Install all packages in requirements.txt
@@ -24,5 +24,7 @@
 
 ### Azure resources
 - You need an Azure account with:
-  - **Azure OpenAI Service** (GPT-4.1 or GPT-4 deployed). 
+  - **Azure OpenAI LLM Service** (GPT-4.1 or GPT-4 deployed). 
+  - **Azure OpenAI Embedding Service** (text-embedding-ada-002). 
   - **Azure Database for PostgreSQL** 
+  - **Azure Cosmos DB**
