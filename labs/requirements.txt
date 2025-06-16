@@ -9,3 +9,8 @@ python-dotenv
 azure-cosmos
 pgvector
 numpy
+mcp
+azure-identity
+openai
+logging
+ipykernel
