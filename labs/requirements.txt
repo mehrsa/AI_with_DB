@@ -4,13 +4,14 @@ notebook==7.4.3
 pandas==2.2.3
 semantic-kernel==1.32.1
 psycopg2-binary == 2.9.10
+psycopg_binary
+psycopg_pool
+psycopg
 rich
-python-dotenv
 azure-cosmos
 pgvector
 numpy
 mcp
 azure-identity
 openai
-logging
 ipykernel
