@@ -14,13 +14,19 @@
 2. Restart your terminal, run below to ensure pyenv is installed: pyenv versions
     - this should give you all python versions you have. If you don't see 3.11.9, install this version by running: **pyenv install 3.11.9**
     - set local version to 3.11.9: **pyenv local 3.11.9**
-3. Run one of below scripts to create a virtual environment: 
+3. In terminal, first go to the "labs" folder (cd labs), and then run one of below scripts to create a virtual environment: 
     - **virtualenv myenv**
+    OR
     - **python -m venv myenv**
-4. Activate the virtual environment:
+4. ENSURE Activate the virtual environment:
     - **.\myenv\Scripts\activate**
 5. Install all packages in requirements.txt
     - **pip install -r requirements.txt**
+- **Every time you want to run the notebooks, you would need to repeat below:**
+ 
+    -- Go to labs folder
+
+    -- Activate the virtual environment as step 4 above
 
 ### Azure resources
 - You need an Azure account with:
