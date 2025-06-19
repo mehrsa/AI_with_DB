@@ -38,7 +38,7 @@ CREATE TABLE customers(
 );
 CREATE TABLE sales (
     sales_id SERIAL PRIMARY KEY,
-    customer_id INTEGER,
+    customer_id INTEGER REFERENCES customers(customer_id),
     quantity NUMERIC(10, 2),
     product_id INTEGER REFERENCES products(product_id),
     sale_date DATE DEFAULT CURRENT_DATE
@@ -59,7 +59,7 @@ CREATE TABLE shipments (
 );
 CREATE TABLE reviews(
     review_id SERIAL PRIMARY KEY,
-    customer_id INTEGER,
+    customer_id INTEGER REFERENCES customers(customer_id),
     product_id INTEGER,
     sales_id  INTEGER REFERENCES sales(sales_id),
     rating INTEGER CHECK (rating >= 1 AND rating <= 5),
