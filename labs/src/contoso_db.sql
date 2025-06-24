@@ -32,7 +32,7 @@ CREATE TABLE customers(
     city VARCHAR(100),
     state VARCHAR(100),
     country VARCHAR(100),
-    sentiment_score NUMERIC(5, 2) DEFAULT 0,
+    sentiment_score NUMERIC(5, 2) DEFAULT NULL,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL
 );
@@ -99,12 +99,12 @@ INSERT INTO customers (city, state, country, sentiment_score, name, email) VALUE
 ('Chicago', 'IL', 'USA', 3.5, 'Alice Johnson', 'aj@yahoo.com'),
 ('Houston', 'TX', 'USA', 4, 'Bob Brown', 'bb@dl.com'),
 ('Phoenix', 'AZ', 'USA', 1, 'Charlie White', 'charlie@yahoo.ca'),
-('San Francisco', 'CA', 'USA', 0, 'David Green', 'davidg@g.com'),
-('Seattle', 'WA', 'USA', 0, 'Eve Black', 'eve@example.ca'),
-('New york', 'NY', 'USA', 0, 'Frank Blue', 'fb#test.com'),
-('Seattle', 'WA', 'USA', 0,  'Grace Yellow', 'grace@yellow.co'),
-('Miami', 'FL', 'USA', 0, 'Hank Purple', 'hp@test.com'),
-('Los Angeles', 'CA', 'USA', 0, 'Zara Orange', 'zara@orange.com')
+('San Francisco', 'CA', 'USA',NULL, 'David Green', 'davidg@g.com'),
+('Seattle', 'WA', 'USA', NULL, 'Eve Black', 'eve@example.ca'),
+('New york', 'NY', 'USA', NULL, 'Frank Blue', 'fb#test.com'),
+('Seattle', 'WA', 'USA', NULL,  'Grace Yellow', 'grace@yellow.co'),
+('Miami', 'FL', 'USA',NULL, 'Hank Purple', 'hp@test.com'),
+('Los Angeles', 'CA', 'USA', NULL, 'Zara Orange', 'zara@orange.com')
 ;
 
 INSERT INTO sales (customer_id, quantity, product_id) VALUES
