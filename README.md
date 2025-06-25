@@ -68,6 +68,20 @@ Assuming you have deployed an Azure Cosmos DB resource:
 
 Nothing else needed, data for this will be populated during the labs. 
 
+### Connecting to Azure AI services
+
+1. You would need to create an Azure OpenAI resource in your resource group. 
+2. Go to Overview ->Explore Azure AI Foundry portal
+3. In "Model catalog" tab, you can search for below two models and deploy (if you don't have existing deployments):
+    - gpt-4.1 
+    - text-embedding-ada-002
+4. After deployments are done, to get info for your .env variables, head to "Deployments" tab, click on the desired model:
+    - For both the llm and embedding model, the AZURE_OPEN_AI_KEY is the same and is under "key" value 
+    - For both llm and embedding models, the "ENDPOINT" variables are the  content of "Target URI" in their respective pages
+    - For AZURE_OPENAI_BASE_EMBED_URL, remove everything after "text-embedding-ada-002" in the Target URI value. For example:
+        -- considering this dummy Target URI: https://example.openai.azure.com/openai/deployments/text-embedding-ada-002/embeddings?api-version=2023-05-15, this would be the base embed url: https://example.openai.azure.com/openai/deployments/text-embedding-ada-002
+
+
 Thank you!
     
 
