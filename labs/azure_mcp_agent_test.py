@@ -7,6 +7,7 @@ from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
 from semantic_kernel.connectors.mcp import MCPStdioPlugin
 from dotenv import load_dotenv
 load_dotenv()
+import sys
 
 import warnings
 warnings.filterwarnings("ignore", category=ResourceWarning)
@@ -36,7 +37,8 @@ async def init_chat():
         init_input = (
             f"connect to postgres resoource with subscription id: {os.getenv('AZURE_SUBSCRIPTION_ID')}, "
             f"and resource group: {os.getenv('AZURE_RESOURCE_GROUP')}, "
-            "and postgres server name: merpg. "
+            f"and postgres server name: {os.getenv('POSTGRES_SERVER_NAME')}, "
+            f"access database named: {os.getenv('POSTGRES_DB')}, "
             "use Azure AD authentication to access the resources using username: "
             f"{os.getenv('POSTGRES_USER')}, "   
         )
@@ -46,10 +48,6 @@ async def init_chat():
         print(f"# {response.name}: {response} ")
         thread = response.thread
         while True:
-            # 2. Create a thread to hold the conversation
-            # If no thread is provided, a new thread will be
-            # created and returned with the initial response
-
             user_input = input("Enter your question (or type 'bye' to exit): ").strip()
             print(f"# User: {user_input} ")
             if user_input.lower() == "bye":
@@ -59,8 +57,10 @@ async def init_chat():
                 response = await agent.get_response(messages=user_input, thread=thread)
                 print(f"# {response.name}: {response} ")
                 thread = response.thread
-        azure_plugin.close()
-         
-
+        
 if __name__ == "__main__":
-    asyncio.run(init_chat())
+    try:
+        asyncio.run(init_chat())
+    finally:
+        if sys.platform == "win32":
+            sys.stderr = open(os.devnull, "w")
