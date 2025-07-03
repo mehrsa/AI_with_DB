@@ -151,7 +151,7 @@ class Contoso_WritePlugin:
 
 
 
-async def run(transport: Literal["stdio"] = "stdio", port: int | None = None) -> None:
+async def run(transport: Literal["stdio"] = "stdio") -> None:
     agent = ChatCompletionAgent(
         service=AzureChatCompletion(),
         name="WriteAgent",
@@ -183,4 +183,4 @@ async def run(transport: Literal["stdio"] = "stdio", port: int | None = None) ->
 
 if __name__ == "__main__":
     args = parse_arguments()
-    anyio.run(run, args.transport, args.port)
+    anyio.run(run, args.transport)
