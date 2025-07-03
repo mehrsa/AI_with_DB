@@ -12,6 +12,7 @@ from semantic_kernel.functions import kernel_function
 
 logger = logging.getLogger(__name__)
 
+# This script shows an example of exposing a Semantic Kernel agent as an MCP server
 
 from get_conn import get_connection_uri
 from psycopg2 import pool
@@ -21,15 +22,9 @@ def parse_arguments():
     parser.add_argument(
         "--transport",
         type=str,
-        choices=["sse", "stdio"],
+        choices=["stdio"],
         default="stdio",
         help="Transport method to use (default: stdio).",
-    )
-    parser.add_argument(
-        "--port",
-        type=int,
-        default=None,
-        help="Port to use for SSE transport (required if transport is 'sse').",
     )
     return parser.parse_args()
 
@@ -164,13 +159,12 @@ async def run(transport: Literal["stdio"] = "stdio", port: int | None = None) ->
 
                         Below are the instructions you must follow:
                         - You must always first esnure you have the database schema.
-                        - For adding a new record, ensure that there is value provided for all required NOT NULL columns. Ask the user for any missing values.
-                        - Always prioritize using a stored procedure if available for that operation.
-                        - You can also create new stored procedures.
-                        - Stored procedures should not have OUT parameters.
+                        - Always prioritize using a stored procedure if available for the task.
+                        - For adding a new record, ensure that there is value provided for all required NOT NULL columns. Ask the user for any missing values.                       
+                        - You can also create new stored procedures. Stored procedures should not have OUT parameters.
                         - In case of a duplicate record, add the new record with a different primary key value. 
-                        - You must always ensure that the operation does not violate referential integrity.
-                        - Before running the query, you must always first show the query to user and ask user for confirmation.
+                        - You must always ensure to not violate referential integrity.
+                        - Before running the query,ask user to confirm once.
                         """,
         plugins=[Contoso_WritePlugin()],  # add the plugin to the agent
     )
