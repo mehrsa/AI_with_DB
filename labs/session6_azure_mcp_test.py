@@ -12,7 +12,7 @@ import sys
 import warnings
 warnings.filterwarnings("ignore", category=ResourceWarning)
 
-
+# this script is an intro example of how to use Azure MCP Plugin with Semantic Kernel
 async def init_chat():
     # Connect to Azure MCP Plugin
     async with MCPStdioPlugin(
@@ -34,6 +34,7 @@ async def init_chat():
 
         )
         #set context for postgres resource
+        # see: https://learn.microsoft.com/en-in/azure/developer/azure-mcp-server/tools/  (under tool parameters)
         init_input = (
             f"connect to postgres resoource with subscription id: {os.getenv('AZURE_SUBSCRIPTION_ID')}, "
             f"and resource group: {os.getenv('AZURE_RESOURCE_GROUP')}, "
