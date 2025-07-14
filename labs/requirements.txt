@@ -17,3 +17,4 @@ azure-mgmt-postgresqlflexibleservers==1.0.0
 mcp==1.9.4
 azure-identity==1.23.0
 pyodbc==5.2.0
+azure-search-documents
