@@ -38,7 +38,7 @@ class JSONToSQLInserter:
             self.conn.close()
             print("Database connection closed successfully")
 
-    def f(self):
+    def create_table_if_not_exists(self):
         """Create product_catalogue table if it doesn't exist"""
         if not self.conn:
             return False
@@ -49,20 +49,22 @@ class JSONToSQLInserter:
             # Check if table exists
             check_table_sql = """
             IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
-                         WHERE TABLE_NAME = 'product_catalogue')
+                         WHERE TABLE_NAME = 'products_catalogue')
             BEGIN
-                CREATE TABLE dbo.product_catalogue (
+                CREATE TABLE dbo.products_catalogue (
                     id INTEGER PRIMARY KEY,
+                    prod_id INTEGER,
                     name NVARCHAR(MAX),
                     category NVARCHAR(255),
                     description NVARCHAR(MAX),
+                    description_dup NVARCHAR(MAX),
                     price REAL
                 );
-                PRINT 'Table product_catalogue created successfully';
+                PRINT 'Table products_catalogue created successfully';
             END
             ELSE
             BEGIN
-                PRINT 'Table product_catalogue already exists';
+                PRINT 'Table products_catalogue already exists';
             END
             """
             
@@ -112,37 +114,25 @@ class JSONToSQLInserter:
             print(f"Error loading JSON file: {e}")
             return []
 
-    def validate_and_clean_data(self, json_data):
+    def get_data(self, json_data):
         """Validate and clean JSON data before insertion"""
         valid_products = []
         invalid_count = 0
-        
         for i, product in enumerate(json_data):
             try:
-                # Check for required fields and clean data
-                if not isinstance(product, dict):
-                    invalid_count += 1
-                    continue
-                
-                # Validate required fields
-                required_fields = ['id', 'name', 'category', 'description', 'price']
-                missing_fields = [field for field in required_fields if field not in product or product[field] is None]
-                
-                if missing_fields:
-                    print(f"Record {i+1} missing fields: {missing_fields}")
-                    invalid_count += 1
-                    continue
-                
+
                 # Clean and validate data types
-                cleaned_product = {
+                product = {
                     'id': int(product['id']),
+                    'prod_id': int(product['id']),
                     'name': str(product['name']).strip(),
                     'category': str(product['category']).strip(),
                     'description': str(product['description']).strip(),
+                    'description_dup': str(product['description']).strip(),
                     'price': float(product['price'])
                 }
                 
-                valid_products.append(cleaned_product)
+                valid_products.append(product)
                 
             except (ValueError, KeyError, TypeError) as e:
                 print(f"Record {i+1} validation error: {e}")
@@ -166,8 +156,8 @@ class JSONToSQLInserter:
             
             # Prepare INSERT statement
             insert_sql = """
-            INSERT INTO dbo.product_catalogue (id, name, category, description, price)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO dbo.products_catalogue (id, prod_id, name, category, description, description_dup, price)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """
             
             # Insert in batches for better performance
@@ -177,7 +167,7 @@ class JSONToSQLInserter:
             for i in range(0, len(products), batch_size):
                 batch = products[i:i + batch_size]
                 batch_data = [
-                    (p['id'], p['name'], p['category'], p['description'], p['price'])
+                    (p['id'], p['prod_id'], p['name'], p['category'], p['description'], p['description_dup'], p['price'])
                     for p in batch
                 ]
                 
@@ -234,7 +224,7 @@ def main():
             return
         
         # Validate and clean data
-        valid_products = inserter.validate_and_clean_data(json_data)
+        valid_products = inserter.get_data(json_data)
         
         if not valid_products:
             print("No valid products found after validation")
